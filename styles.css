@@ -38,21 +38,29 @@ body::before {
     flex-direction: column;
 }
 
-/* Modern Glass effect styles */
+/* Modern Glass effect styles - Mobile Compatible */
 .glass {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-radius: 20px;
     box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.2),
-        0 2px 16px rgba(0, 0, 0, 0.1),
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 2px 16px rgba(0, 0, 0, 0.15),
         inset 0 1px 0 rgba(255, 255, 255, 0.15),
         inset 0 -1px 0 rgba(255, 255, 255, 0.05);
-    border: 1.5px solid rgba(255, 255, 255, 0.12);
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
     position: relative;
     overflow: hidden;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Fallback for browsers that don't support backdrop-filter */
+@supports not (backdrop-filter: blur(20px)) {
+    .glass {
+        background: rgba(30, 30, 60, 0.85);
+        border: 1.5px solid rgba(255, 255, 255, 0.2);
+    }
 }
 
 .glass::before {
@@ -419,6 +427,38 @@ footer p:last-child {
 }
 
 /* Mobile optimizations */
+@media (max-width: 768px) {
+    /* Stronger glass effects for mobile */
+    .glass {
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Fallback for mobile browsers */
+    @supports not (backdrop-filter: blur(15px)) {
+        .glass {
+            background: rgba(40, 40, 80, 0.9);
+            border: 2px solid rgba(255, 255, 255, 0.25);
+        }
+    }
+
+    .property-item {
+        background: rgba(102, 126, 234, 0.15);
+        border-left: 4px solid #667eea;
+    }
+
+    .contact-list li {
+        background: rgba(102, 126, 234, 0.15);
+    }
+
+    .gallery-item {
+        background: rgba(255, 255, 255, 0.12);
+        border: 2px solid rgba(255, 255, 255, 0.15);
+    }
+}
+
 @media (max-width: 360px) {
     .container {
         padding: 5px;
@@ -440,5 +480,17 @@ footer p:last-child {
 
     .cta-button {
         max-width: 100%;
+    }
+
+    /* Enhanced mobile visibility */
+    .glass {
+        background: rgba(255, 255, 255, 0.15);
+        border: 2px solid rgba(255, 255, 255, 0.25);
+    }
+
+    @supports not (backdrop-filter: blur(15px)) {
+        .glass {
+            background: rgba(50, 50, 100, 0.95);
+        }
     }
 }
